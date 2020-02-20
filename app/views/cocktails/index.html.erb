@@ -1,0 +1,9 @@
+<h1> Miss Cocktails </h1>
+
+<div class="row">
+
+<%= link_to new_cocktail_path, class: 'btn btn-success btn-sm' do %> Add new cocktail <% end %>
+<% @cocktails.each do |cocktail| %> <% end %>
+Name  Ingredients   Doses
+<%= cocktail.name %>  <%= cocktail.ingredients %>  <%= cocktail.doses %>
+<%= link_to 'Details', cocktail_path(cocktail) %>
