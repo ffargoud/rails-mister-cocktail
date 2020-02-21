@@ -4,12 +4,24 @@
  -->
  <div class="row mt-4 mb-4">
   <div class="col-6">
+    <%= @cocktail.name %>
+      Ingredients:
+        <% if @cocktail.doses.empty? %>
+          no ingredients yet!
+        <% else %>
 
-    <h3> Add new ingredient </h3>
-<%= simple_form_for [@cocktail, @dose] do |f| %>
-<%= f.input :description %>
-<%= f.association :ingredient %>
-<%= f.submit %>
-<% end %>
+    <% @cocktail.doses.each do |dose| %>
+    <%= dose.ingredient.name %> — <%= dose.description %> (<%= link_to 'delete', dose_path(dose), method: :delete %>)
+          <% end %>
+
+        <% end %>
+
+  <h3>Add new dose</h3>
+    <% if @dose.errors.any? %>
+      Dose has errors!
+      <% @dose.errors.full_messages.each do |msg| %>
+      <%= msg %>
+        <% end %>
+      <% end %> <%= simple_form_for [@cocktail, @dose] do |f| %> <%= f.input :description %> <%= f.association :ingredient %> <%= f.submit 'Create dose', class: 'btn btn-success' %> <% end %>
 </div>
 </div>

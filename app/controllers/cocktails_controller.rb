@@ -9,21 +9,21 @@ class CocktailsController < ApplicationController
 
   def show
     @cocktail = Cocktail.find(params[:id])
+    @dose = Dose.new
   end
 
   def create
     @cocktail = Cocktail.new(cocktail_params)
-
-    if @cocktail.save # true / false
-      redirect_to cocktails_path
+    if @cocktail.save
+      redirect_to cocktail_path(@cocktail)
     else
-      render :new # render 'new' || render 'parks/new'
+      render :new
     end
   end
 
-  private
+private
 
-  def cocktail_params
-    params.require(:cocktail).permit(:name, :ingredients, :doses)
-  end
+def cocktail_params
+  params.require(:cocktail).permit(:name, :ingredient_id)
+end
 end
